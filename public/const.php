@@ -1,6 +1,7 @@
 <?php
 const
     TITLE         = 'title',
+    APPID         = 'appid',
     APP_ID        = 'appId',
     APP_SECRET    = 'appSecret',
     TOKEN         = 'token',
@@ -10,4 +11,11 @@ const
     OPEN_ACCOUNT  = 'open_account',
     FOLLOW_STATUS = 'follow_status',
     FOLLOW_TIME   = 'follow_time',
-    UNFOLLOW_TIME = 'unfollow_time';
+    UNFOLLOW_TIME = 'unfollow_time',
+    REDIRECT_URI  = 'redirect_uri',
+    RESPONSE_TYPE = 'response_type',
+    CODE          = 'code',
+    MSG           = 'msg',
+    DATA          = 'data',
+    SCOPE         = 'scope',
+    STATE         = 'state';
