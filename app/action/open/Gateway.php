@@ -1,4 +1,5 @@
 <?php
+
 namespace action\open;
 
 use core\Action;
@@ -35,7 +36,25 @@ class Gateway extends Action
                 $xml = json_decode(json_encode($xml), true);
 
                 if ($xml && is_array($xml)) {
-                    log_debug('wechatGatewayXmlInfo', $xml);
+                    $handlerName = isset($xml['MsgType']) ? (string)$xml['MsgType'] : '';
+                    if ('event' === $handlerName) {
+                        $handlerName = isset($xml['Event']) ? (string)$xml['Event'] : '';
+                    }
+
+                    $handlerName = ucwords($handlerName);
+                    $handler = 'service\\open\\wechat\\handle\\' . $handlerName;
+
+                    if (class_exists($handler)) {
+                        $reClass = new \ReflectionClass($handler);
+                        $method = 'handle';
+                        if ($reClass->hasMethod($method) && $reClass->getMethod($method)->isPublic()) {
+                            $obj = new $handler($wechat);
+                            $reply = $obj->$method($xml);
+                            $passiveReplyObj->exec($reply, $xml);
+                        }
+                    } else {
+                        log_debug('openWechatGatewayXmlNoHandlerInfo', $xml);
+                    }
                 }
             }
         }

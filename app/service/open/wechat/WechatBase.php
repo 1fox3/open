@@ -6,10 +6,12 @@ use base\Config;
 
 class WechatBase
 {
+    public static $openType = 'wechat';//开放平台类型
     private $wechat = '';//公众号的标识
     private $appId = '';//公众号的appId
     private $appSecret = '';//公众号的appSecret
     private $token = '';//公众号的token，用于加密验证
+    private $openName = '';//公众号名称
     private $config = [];//公众号的config
 
     public function __construct($wechat)
@@ -21,6 +23,7 @@ class WechatBase
             $this->appId = isset($config[APP_ID]) ? (string)$config[APP_ID] : '';
             $this->appSecret = isset($config[APP_SECRET]) ? (string)$config[APP_SECRET] : '';
             $this->token = isset($config[TOKEN]) ? (string)$config[TOKEN] : '';
+            $this->openName = isset($config[OPENNAME]) ? (string)$config[OPENNAME] : '';
         }
     }
 
@@ -59,6 +62,17 @@ class WechatBase
     {
         return $this->token;
     }
+
+    /**
+     * 获取公众号名称
+     * @return string
+     */
+    public function getOpenName(): string
+    {
+        return $this->openName;
+    }
+
+
 
     /**
      * 获取微信公众号配置信息
