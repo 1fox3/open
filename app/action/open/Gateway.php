@@ -1,7 +1,7 @@
 <?php
 namespace action\open;
 
-use core\action;
+use core\Action;
 use base\Input;
 
 class Gateway extends Action
