@@ -18,4 +18,9 @@ const
     MSG           = 'msg',
     DATA          = 'data',
     SCOPE         = 'scope',
-    STATE         = 'state';
+    STATE         = 'state',
+    NAME          = 'name',
+    TYPE          = 'type',
+    VIEW          = 'view',
+    URL           = 'url',
+    SUB_BUTTON    = 'sub_button';

@@ -60,4 +60,37 @@ class Gateway extends Action
         }
         $passiveReplyObj->exec();
     }
+
+    public function menu()
+    {
+        $wechat = 'lss';
+        $obj = new \service\open\wechat\MenuTool($wechat);
+        $menuArr = [
+            [
+                NAME => '股市数据',
+                SUB_BUTTON => [
+                    [
+                        TYPE => VIEW,
+                        NAME => '关注列表',
+                        "url" => $obj->getMenuUrl('http://stock.1fox3.com/stock/fllowList.html'),
+                    ],
+                    [
+                        TYPE => VIEW,
+                        NAME => '涨跌变化',
+                        "url" => $obj->getMenuUrl('http://stock.1fox3.com/stock/upDown.html'),
+                    ],
+                    [
+                        TYPE => VIEW,
+                        NAME => '连续涨跌',
+                        "url" => $obj->getMenuUrl('http://stock.1fox3.com/stock/limitUpDown.html'),
+                    ],
+                ],
+            ],
+        ];
+
+        $menuCreateObj = new \service\open\wechat\api\MenuCreate($wechat);
+        $menuCreateObj->setMenu($menuArr);
+        $menuCreateObj->exec();
+        echo $menuCreateObj->getCode() . $menuCreateObj->getMsg();
+    }
 }

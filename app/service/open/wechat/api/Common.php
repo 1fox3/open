@@ -25,7 +25,7 @@ abstract class Common extends WechatBase
         $calledClass = str_replace(__NAMESPACE__ . "\\", "", get_called_class());
         $calledClass = preg_replace('/([A-Z])/', '/$1', $calledClass);
         $calledClass = strtolower($calledClass);
-        $this->api = static::$gateway . $calledClass;
+        $this->api = self::$gateway . $calledClass;
     }
 
     /**
