@@ -33,6 +33,6 @@ class Subscribe extends WechatBase
             $tOpenUserInfoObj->insert(array_merge($where, $updateInfo));
         }
 
-        return '欢迎关注' . $this->getWechat() . '微信公众号';
+        return '欢迎关注' . $this->getOpenName() . '微信公众号';
     }
 }
