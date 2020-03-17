@@ -1,34 +1,22 @@
 <?php
+namespace service\open\wechatMini\api;
 
-namespace service\open\wechat\api;
-
-use service\open\wechat\WechatBase;
+use service\open\wechatMini\api\auth\GetAccessToken;
+use service\open\wechatMini\WechatMiniBase;
 use base\Http;
 
-abstract class Common extends WechatBase
+abstract class Common extends WechatMiniBase
 {
-    //微信公众号接口网关
-    private static $gateway = 'https://api.weixin.qq.com/cgi-bin';
+    //微信小程序接口域名
+    protected static $gateway = 'https://api.weixin.qq.com';
     //接口调用code
     private $code = 1;
     //接口调用msg
-    private $msg = '尚未调用微信公众号接口';
-    //微信公众号接口
+    private $msg = '尚未调用微信小程序接口';
+    //微信小程序接口
     protected $api;
     //默认接口请求方式
     protected $requestMethod = 'post';
-
-    /**
-     * 根据调用类确定调用接口
-     */
-    public function __construct($wechat)
-    {
-        parent::__construct($wechat);
-        $calledClass = str_replace(__NAMESPACE__ . "\\", "", get_called_class());
-        $calledClass = preg_replace('/([A-Z])/', '/$1', $calledClass);
-        $calledClass = strtolower($calledClass);
-        $this->api = self::$gateway . $calledClass;
-    }
 
     /**
      * 错误码
@@ -60,7 +48,7 @@ abstract class Common extends WechatBase
      */
     public function accessToken($refeash = false)
     {
-        $tokenObj = new Token($this->getWechat());
+        $tokenObj = new GetAccessToken($this->getWechatMini());
         return $tokenObj->accessToken($refeash);
     }
 
@@ -73,7 +61,7 @@ abstract class Common extends WechatBase
         $params = $this->getApiParams();
         $params = $params ?: [];
 
-        $apiUrl = $this->api . '?access_token=' . $this->accessToken();
+        $apiUrl = self::$gateway . $this->api . '?access_token=' . $this->accessToken();
 
         if ($params && 'post' === $this->requestMethod) {
             //json_encode时需要JSON_UNESCAPED_UNICODE参数
@@ -116,7 +104,7 @@ abstract class Common extends WechatBase
             log_error(
                 'OpenWechatError',
                 [
-                    $this->api,
+                    $apiUrl,
                     $params,
                     $ret,
                     Http::getLastRequestCode(),
@@ -126,7 +114,7 @@ abstract class Common extends WechatBase
             );
         }
 
-        if (40001 == $this->code || 41001 == $this->code) {//token时效，刷新
+        if(40001 == $this->code || 41001 == $this->code ){//token时效，刷新
             $this->accessToken(true);
             return $this->exec();
         }

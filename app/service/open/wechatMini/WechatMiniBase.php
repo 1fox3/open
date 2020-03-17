@@ -1,48 +1,46 @@
 <?php
-namespace service\open\wechat;
+namespace service\open\wechatMini;
 
 use base\Config;
 
 /**
- * 微信公众号基类
- * Class WechatBase
- * @package service\open\wechat
+ * 微信小程序基类
+ * Class WechatMiniBase
+ * @package service\open\wechatMini
  */
-class WechatBase
+class WechatMiniBase
 {
-    public static $openType = 'wechat';//开放平台类型
-    private $wechat = '';//公众号的标识
+    public static $openType = 'wechat_mini';//开放平台类型
+    private $wechatMini = '';//微信小程序的标识
     private $appId = '';//公众号的appId
     private $appSecret = '';//公众号的appSecret
-    private $token = '';//公众号的token，用于加密验证
     private $openName = '';//公众号名称
     private $config = [];//公众号的config
 
     /**
      * 构造函数
-     * WechatBase constructor.
-     * @param $wechat
+     * WechatMiniBase constructor.
+     * @param $wechatMini
      */
-    public function __construct($wechat)
+    public function __construct($wechatMini)
     {
-        $this->wechat = $wechat;
-        $config = self::getWechatConfig($wechat);
+        $this->wechatMini = $wechatMini;
+        $config = self::getWechatMiniConfig($wechatMini);
         if ($config && is_array($config)) {
             $this->config = $config;
             $this->appId = isset($config['appId']) ? (string)$config['appId'] : '';
             $this->appSecret = isset($config[APPSECRET]) ? (string)$config[APPSECRET] : '';
-            $this->token = isset($config[TOKEN]) ? (string)$config[TOKEN] : '';
             $this->openName = isset($config[OPENNAME]) ? (string)$config[OPENNAME] : '';
         }
     }
 
     /**
-     * 获取微信公众号标识
+     * 获取微信小程序标识
      * @return string
      */
-    public function getWechat(): string
+    public function getWechatMini(): string
     {
-        return $this->wechat;
+        return $this->wechatMini;
     }
 
     /**
@@ -64,16 +62,7 @@ class WechatBase
     }
 
     /**
-     * 获取token
-     * @return string
-     */
-    public function getToken(): string
-    {
-        return $this->token;
-    }
-
-    /**
-     * 获取微信公众号名称
+     * 获取微信小程序名称
      * @return string
      */
     public function getOpenName(): string
@@ -81,10 +70,8 @@ class WechatBase
         return $this->openName;
     }
 
-
-
     /**
-     * 获取微信公众号配置信息
+     * 获取微信小程序配置信息
      * @return array
      */
     public function getConfig(): array
@@ -93,13 +80,13 @@ class WechatBase
     }
 
     /**
-     * 获取微信公众号配置
-     * @param $wechat
+     * 获取微信小程序配置
+     * @param $wechatMini
      * @return array
      */
-    public static function getWechatConfig($wechat): array
+    public static function getWechatMiniConfig($wechatMini): array
     {
-        $wechatConfig = Config::get('/open/wechat', $wechat);
-        return is_array($wechatConfig) ? $wechatConfig : [];
+        $wechatMiniConfig = Config::get('/open/wechatMini', $wechatMini);
+        return is_array($wechatMiniConfig) ? $wechatMiniConfig : [];
     }
 }

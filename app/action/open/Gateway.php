@@ -93,4 +93,12 @@ class Gateway extends Action
         $menuCreateObj->exec();
         echo $menuCreateObj->getCode() . $menuCreateObj->getMsg();
     }
+
+    /**
+     * 请求测试
+     */
+    public function test()
+    {
+        log_debug('test', $_REQUEST);
+    }
 }
