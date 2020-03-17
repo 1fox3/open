@@ -27,4 +27,16 @@ class Action {
 
         return array_merge($fixArr,$params);
     }
+
+    /**
+     * 接口类返回
+     * @param $code
+     * @param $msg
+     * @param string $data
+     */
+    protected function raise($code, $msg, $data = '')
+    {
+        header('Content-Type:application/json;charset=UTF-8');
+        exit(json_encode([CODE => $code, MSG => $msg, DATA => $data]));
+    }
 }

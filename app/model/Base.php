@@ -50,8 +50,8 @@ abstract class Base
     }
 
     //获取单条记录
-    public function getOne($where = [],$orderBy = "") {
-        return $this->getConn()->getOne($where,$orderBy);
+    public function getOne($where = [], $sqlInfo = []) {
+        return $this->getConn()->getOne($where,$sqlInfo);
     }
 
     //更新记录

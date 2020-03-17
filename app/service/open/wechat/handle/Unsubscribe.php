@@ -17,20 +17,22 @@ class Unsubscribe extends WechatBase
         $tOpenUserInfoObj = new \model\User\TOpenUserInfo();
 
         $where = [
-            OPENID => $openid,
-            OPEN_TYPE => self::$openType,
+            INT_OPENID   => crc32($openid),
+            OPENID       => $openid,
+            OPEN_TYPE    => self::$openType,
             OPEN_ACCOUNT => $this->getWechat(),
         ];
 
-        $updateInfo = [
+        $update = [
             FOLLOW_STATUS => 0,
-            UNFOLLOW_TIME   => date('Y-m-d H:i:s', $unfollowTimestamp),
+            UNFOLLOW_TIME => date('Y-m-d H:i:s', $unfollowTimestamp),
         ];
 
-        if ($tOpenUserInfoObj->getOne($where)) {
-            $tOpenUserInfoObj->update($where, $updateInfo);
+        $row = $tOpenUserInfoObj->getOne($where);
+        if (is_array($row) && $row) {
+            $tOpenUserInfoObj->update([ID => $row[ID]], $update);
         } else {
-            $tOpenUserInfoObj->insert(array_merge($where, $updateInfo));
+            $tOpenUserInfoObj->insert(array_merge($where, $update));
         }
 
         return '';
