@@ -33,6 +33,13 @@ class Subscribe extends WechatBase
             $tOpenUserInfoObj->update([ID => $row[ID]], $update);
         } else {
             $tOpenUserInfoObj->insert(array_merge($where, $update));
+            //将用户保存在用户信息表
+            $tUserObj = new \model\User\TUser();
+            $tUserObj->insert([
+                PLAT_TYPE    => 1,
+                PLAT_ID      => $this->getWechat(),
+                PLAT_USER_ID => $openid,
+            ]);
         }
 
         return '欢迎关注' . $this->getOpenName() . '微信公众号';

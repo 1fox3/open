@@ -41,6 +41,9 @@ const
     OPEN_ACCOUNT        = 'open_account',
     //P
     PROVINCE            = 'province',
+    PLAT_TYPE           = 'plat_type',
+    PLAT_ID             = 'plat_id',
+    PLAT_USER_ID        = 'plat_user_id',
     //Q
     //R
     REDIRECT_URI        = 'redirect_uri',

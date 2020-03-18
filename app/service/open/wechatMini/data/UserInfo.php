@@ -48,6 +48,13 @@ class UserInfo extends DataBase
             $tOpenUserInfoObj->update([ID => $row[ID]], $update);
             return $row[ID];
         }
-        return $tOpenUserInfoObj->insert(array_merge($where, $update));
+        $insertId = $tOpenUserInfoObj->insert(array_merge($where, $update));
+        $tUserObj = new \model\User\TUser();
+        $tUserObj->insert([
+            PLAT_TYPE    => 1,
+            PLAT_ID      => $this->getWechatMini(),
+            PLAT_USER_ID => $openid,
+        ]);
+        return $insertId;
     }
 }
