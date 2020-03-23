@@ -4,4 +4,5 @@
  */
 return [
     '/open/gateway/wechat/(.*)' => '/open/Gateway/wechat:wehat=$1',
+    '/open/gateway/wechatMini/(.*)' => '/open/Gateway/wechatMini:wehatMini=$1',
 ];
