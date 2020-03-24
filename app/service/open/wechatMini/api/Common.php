@@ -16,7 +16,9 @@ abstract class Common extends WechatMiniBase
     //微信小程序接口
     protected $api;
     //默认接口请求方式
-    protected $requestMethod = 'post';
+    protected $requestMethod = POST;
+    //接口返回的数据格式
+    protected $responseType = JSON;
 
     /**
      * 错误码
@@ -84,6 +86,10 @@ abstract class Common extends WechatMiniBase
             return [];
         }
 
+        //当返回的数据不是json时，直接返回
+        if (JSON !== $this->responseType) {
+            return $ret;
+        }
         $ret = json_decode((string)$ret, true);
 
         if (json_last_error() == JSON_ERROR_NONE && is_array($ret)) {

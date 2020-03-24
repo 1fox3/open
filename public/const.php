@@ -16,6 +16,7 @@ const
     FOLLOW_STATUS       = 'follow_status',
     FOLLOW_TIME         = 'follow_time',
     //G
+    GET                 = 'get',
     GRANT_TYPE          = 'grant_type',
     GENDER              = 'gender',
     //H
@@ -26,6 +27,7 @@ const
     IV                  = 'iv',
     //J
     JS_CODE             = 'js_code',
+    JSON                = 'json',
     //K
     //L
     LANGUAGE            = 'language',
@@ -40,6 +42,7 @@ const
     OPEN_TYPE           = 'open_type',
     OPEN_ACCOUNT        = 'open_account',
     //P
+    POST                = 'post',
     PROVINCE            = 'province',
     PLAT_TYPE           = 'plat_type',
     PLAT_ID             = 'plat_id',
@@ -49,12 +52,14 @@ const
     REDIRECT_URI        = 'redirect_uri',
     RESPONSE_TYPE       = 'response_type',
     //S
+    SCENE               = 'scene',
     SCOPE               = 'scope',
     STATE               = 'state',
     SUB_BUTTON          = 'sub_button',
     SECRET              = 'secret',
     SESSION_KEY         = 'session_key',
     //T
+    TEXT                = 'text',
     TITLE               = 'title',
     TOKEN               = 'token',
     TYPE                = 'type',

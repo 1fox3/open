@@ -37,8 +37,8 @@ return [
         'appSecret'  => '15120a6915577aa425bcdb272db54186',
         //回调网关使用
         //token
-        'token'      => '',
+        'token'      => 'dsfglsryjrutjfgnh',
         //消息体加解密密匙
-        'aesKey'     => '',
+        'aesKey'     => 'qHKaxOojl7DvbjOTi9iuELFXA754k4IQccM0czcd0S3',
     ],
 ];
